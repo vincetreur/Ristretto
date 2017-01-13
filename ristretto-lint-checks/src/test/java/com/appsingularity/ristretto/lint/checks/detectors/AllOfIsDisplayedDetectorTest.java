@@ -24,7 +24,6 @@ public class AllOfIsDisplayedDetectorTest extends BaseLintDetectorTest {
 
     public void testOnViewAllOfAllOfWithIsDisplayed() throws Exception {
         String output = lintFiles("allof_isdisplayed/OnViewAllOfAllOfWithIsDisplayed.java");
-        System.out.println(output);
         assertTrue(output.contains(AllOfIsDisplayedDetector.ISSUE.getId()));
         assertTrue(output.contains("Information"));
         assertTrue(output.contains("Consider using withDisplayedView(R.id.some_id)"));

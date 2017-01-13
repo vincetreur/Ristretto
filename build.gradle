@@ -39,6 +39,7 @@ subprojects { project ->
     apply plugin: 'checkstyle'
 
     task checkstyle(type: Checkstyle) {
+        group 'verification'
         configFile rootProject.file('checkstyle.xml')
         source 'src/main/java'
         ignoreFailures false

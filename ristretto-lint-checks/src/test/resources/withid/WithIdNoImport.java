@@ -1,9 +1,8 @@
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.action.ViewActions;
-import static android.support.test.espresso.action.ViewAction;
 import static android.support.test.espresso.Espresso;
+import static android.support.test.espresso.action.ViewAction;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.appsingularity.ristretto.Ristretto;
 
 public class WithIdNoImport {

@@ -25,6 +25,7 @@ public final class Ristretto {
 
     /**
      * This replaces onView(withId(viewId)) and onView(withText(stringId))
+     * @see {@link android.support.test.espresso.Espresso#onView(org.hamcrest.Matcher)}
      */
     public static ViewInteraction withView(final int resourceId) {
         // This is a placeholder to resolve the resourceId into a type.

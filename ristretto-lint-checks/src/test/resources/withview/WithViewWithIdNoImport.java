@@ -1,5 +1,4 @@
 import static android.support.test.Ristretto.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.action.ViewActions;
 import static android.support.test.espresso.action.ViewAction;
 import static android.support.test.espresso.matcher.ViewMatchers;
 import static com.appsingularity.ristretto.Ristretto;
