@@ -1,0 +1,52 @@
+plugins {
+    id "com.appsingularity.android-app-version" version "1.0.0"
+}
+apply plugin: 'com.android.library'
+
+appVersion {
+    majorVersion 0
+    minorVersion 9
+    patchVersion 0
+    isSnapshot true
+}
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+configurations {
+    lintChecks
+}
+
+dependencies {
+    lintChecks project(path: ':ristretto-lint-checks', configuration: "lintChecks")
+}
+
+task copyLintJar(type: Copy) {
+    from(configurations.lintChecks) {
+        rename {
+            String fileName ->
+                'lint.jar'
+        }
+    }
+    into 'build/intermediates/lint/'
+}
+
+
+project.afterEvaluate {
+    def compileLintTask = project.tasks.find { it.name == 'compileLint' }
+    compileLintTask.dependsOn(copyLintJar)
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

@@ -1,0 +1,57 @@
+apply plugin: 'java'
+
+sourceCompatibility = "1.6"
+targetCompatibility = "1.6"
+
+repositories {
+    maven {
+        url "file://${getAndroidHome()}/extras/android/m2repository"
+    }
+    jcenter()
+}
+
+def getAndroidHome() {
+    def home = System.getenv().get('ANDROID_HONE')
+    if (home == null) {
+        File localProperties = new File("$rootProject.projectDir/local.properties")
+        String text = localProperties.text
+        def group = (text =~ /sdk\.dir=(.*)/)
+        home = group[0][1]
+    }
+    home
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.tools.lint:lint-api:24.3.1'
+    compile 'com.android.tools.lint:lint-checks:24.3.1'
+
+    testCompile 'org.assertj:assertj-core:3.0.0'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'com.android.tools.lint:lint:24.3.1'
+    testCompile 'com.android.tools.lint:lint-tests:24.3.1'
+    testCompile 'com.android.tools:testutils:24.3.1'
+    testCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+}
+
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+    test.java.srcDirs = ["src/test/java"]
+}
+
+
+jar {
+    manifest {
+        attributes("Lint-Registry": "com.appsingularity.ristretto.lint.checks.RistrettoLintIssueRegistry")
+    }
+}
+
+configurations {
+    lintChecks
+}
+
+dependencies {
+    lintChecks files(jar)
+}
+
+defaultTasks 'assemble'

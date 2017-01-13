@@ -1,0 +1,38 @@
+plugins {
+    id "com.appsingularity.android-app-version" version "1.0.0"
+}
+apply plugin: 'com.android.library'
+
+appVersion {
+    majorVersion 0
+    minorVersion 9
+    patchVersion 0
+    isSnapshot true
+}
+
+android {
+    lintOptions {
+        abortOnError false
+    }
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
