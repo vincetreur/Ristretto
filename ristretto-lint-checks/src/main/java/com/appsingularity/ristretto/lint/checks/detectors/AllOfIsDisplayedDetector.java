@@ -8,7 +8,7 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
-import com.appsingularity.ristretto.lint.checks.detectors.util.MethodCalls;
+import com.appsingularity.ristretto.lint.checks.detectors.util.MethodDefinitions;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -22,7 +22,6 @@ import lombok.ast.StrictListAccessor;
 
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.argumentsAsString;
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isNode;
-import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isOperand;
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isWithNode;
 
 
@@ -38,13 +37,13 @@ public class AllOfIsDisplayedDetector extends Detector implements Detector.JavaS
     // region JavaScanner
     @Override
     public List<String> getApplicableMethodNames() {
-        return Arrays.asList(MethodCalls.ALL_OF.methodName);
+        return Arrays.asList(MethodDefinitions.ALL_OF.methodName);
     }
 
     @Override
     public void visitMethod(JavaContext context, AstVisitor visitor, MethodInvocation node) {
 
-        if (!isNode(context, node, MethodCalls.ALL_OF)) {
+        if (!isNode(context, node, MethodDefinitions.ALL_OF)) {
             return;
         }
         // is parent onView or withView?
@@ -66,7 +65,7 @@ public class AllOfIsDisplayedDetector extends Detector implements Detector.JavaS
             Expression next = iterator.next();
             if (next instanceof MethodInvocation) {
                 MethodInvocation invocation = (MethodInvocation) next;
-                if (isNode(context, invocation, MethodCalls.IS_DISPLAYED)) {
+                if (isNode(context, invocation, MethodDefinitions.IS_DISPLAYED)) {
                     foundIsDisplayed = true;
                 } else {
                     other = invocation;
@@ -92,8 +91,8 @@ public class AllOfIsDisplayedDetector extends Detector implements Detector.JavaS
             return false;
         }
         MethodInvocation parent = (MethodInvocation) parentNode;
-        if (!isOperand(context, parent, MethodCalls.RISTRETTO_WITH_VIEW)
-                && !isOperand(context, parent, MethodCalls.ON_VIEW)) {
+        if (!isNode(context, parent, MethodDefinitions.RISTRETTO_WITH_VIEW)
+                && !isNode(context, parent, MethodDefinitions.ON_VIEW)) {
             return false;
         }
         return true;

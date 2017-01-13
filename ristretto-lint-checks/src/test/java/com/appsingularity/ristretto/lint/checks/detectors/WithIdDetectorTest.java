@@ -47,4 +47,14 @@ public class WithIdDetectorTest extends BaseLintDetectorTest {
         assertTrue(output.contains(NO_WARNINGS));
     }
 
+    public void testWithIdOtherPackage() throws Exception {
+        String output = lintFiles("withid/WithIdOtherPackage.java");
+        assertFalse(output.contains(WithIdDetector.ISSUE.getId()));
+        assertFalse(output.contains("Information"));
+        assertFalse(output.contains("Consider using with(R.id.some_id)"));
+        assertFalse(output.contains(THREE_WARNINGS));
+        assertTrue(output.contains(NO_WARNINGS));
+    }
+
+
 }

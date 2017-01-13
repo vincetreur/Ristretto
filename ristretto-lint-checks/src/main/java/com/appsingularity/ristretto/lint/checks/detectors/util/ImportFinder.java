@@ -10,13 +10,13 @@ import lombok.ast.Node;
 
 public class ImportFinder extends ForwardingAstVisitor {
     private boolean importFound = false;
-    private MethodCall methodCall;
+    private MethodDefinition methodDefinition;
 
-    ImportFinder(MethodCall aMethodCall) {
-        methodCall = aMethodCall;
+    ImportFinder(MethodDefinition aMethodDefinition) {
+        methodDefinition = aMethodDefinition;
     }
 
-    public static boolean findImport(JavaContext context, MethodCall aMehtodCall) {
+    public static boolean findImport(JavaContext context, MethodDefinition aMehtodCall) {
         ImportFinder finder = new ImportFinder(aMehtodCall);
         Node surroundingClass = context.getCompilationUnit();
         surroundingClass.accept(finder);
@@ -25,7 +25,7 @@ public class ImportFinder extends ForwardingAstVisitor {
 
     @Override
     public boolean visitImportDeclaration(ImportDeclaration node) {
-        if (methodCall.importMatches(node)) {
+        if (methodDefinition.importMatches(node)) {
             importFound = true;
         }
         return true;

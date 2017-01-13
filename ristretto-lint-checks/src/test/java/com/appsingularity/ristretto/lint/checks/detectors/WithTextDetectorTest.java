@@ -50,4 +50,13 @@ public class WithTextDetectorTest extends BaseLintDetectorTest {
         assertTrue(output.contains(NO_WARNINGS));
     }
 
+    public void testWithIdOtherPackage() throws Exception {
+        String output = lintFiles("withtext/WithTextOtherPackage.java");
+        assertFalse(output.contains(WithTextDetector.ISSUE.getId()));
+        assertFalse(output.contains("Information"));
+        assertFalse(output.contains("Consider using with(R.id.some_id)"));
+        assertFalse(output.contains(SIX_WARNINGS));
+        assertTrue(output.contains(NO_WARNINGS));
+    }
+
 }

@@ -8,8 +8,8 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
-import com.appsingularity.ristretto.lint.checks.detectors.util.MethodCall;
-import com.appsingularity.ristretto.lint.checks.detectors.util.MethodCalls;
+import com.appsingularity.ristretto.lint.checks.detectors.util.MethodDefinition;
+import com.appsingularity.ristretto.lint.checks.detectors.util.MethodDefinitions;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,12 +19,12 @@ import lombok.ast.MethodInvocation;
 
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.argumentsAsString;
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.getFirstArgument;
-import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isOperand;
+import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isNode;
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isWithNode;
 
 public class OnViewDetector extends Detector implements Detector.JavaScanner {
     private static final String MESSAGE_FORMAT = "Consider using `withView({0})`";
-    private static final MethodCall METHOD_CALL = MethodCalls.ON_VIEW;
+    private static final MethodDefinition METHOD_CALL = MethodDefinitions.ON_VIEW;
     public static final Issue ISSUE = Issue.create(
             "RistrettoOnView",
             "Statement can be simplified",
@@ -40,7 +40,7 @@ public class OnViewDetector extends Detector implements Detector.JavaScanner {
 
     @Override
     public void visitMethod(JavaContext context, AstVisitor visitor, MethodInvocation node) {
-        if (isOperand(context, node, METHOD_CALL)) {
+        if (isNode(context, node, METHOD_CALL)) {
             MethodInvocation first = getFirstArgument(node);
             if (first != null) {
                 if (isWithNode(context, first)) {

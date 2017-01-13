@@ -8,8 +8,8 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
-import com.appsingularity.ristretto.lint.checks.detectors.util.MethodCall;
-import com.appsingularity.ristretto.lint.checks.detectors.util.MethodCalls;
+import com.appsingularity.ristretto.lint.checks.detectors.util.MethodDefinition;
+import com.appsingularity.ristretto.lint.checks.detectors.util.MethodDefinitions;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,11 +18,11 @@ import lombok.ast.AstVisitor;
 import lombok.ast.MethodInvocation;
 
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.argumentsAsString;
-import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isOperand;
+import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isNode;
 
 public class WithIdDetector extends Detector implements Detector.JavaScanner {
     private static final String ID = "RistrettoWithId";
-    private static final MethodCall METHOD_CALL = MethodCalls.WITH_ID;
+    private static final MethodDefinition METHOD_CALL = MethodDefinitions.WITH_ID;
     private static final String MESSAGE_FORMAT = "Consider using `with({0})`";
     public static final Issue ISSUE = Issue.create(
             ID,
@@ -39,7 +39,7 @@ public class WithIdDetector extends Detector implements Detector.JavaScanner {
 
     @Override
     public void visitMethod(JavaContext context, AstVisitor visitor, MethodInvocation node) {
-        if (isOperand(context, node, METHOD_CALL)) {
+        if (isNode(context, node, METHOD_CALL)) {
             String message = argumentsAsString(node, MESSAGE_FORMAT);
             context.report(ISSUE, node, context.getLocation(node), message);
         }

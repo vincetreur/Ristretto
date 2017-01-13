@@ -8,22 +8,22 @@ import java.util.List;
 import lombok.ast.ImportDeclaration;
 
 
-public class MethodCall {
-    private static final String DOT = ".";
+public class MethodDefinition {
     private static final String STAR = "*";
     public final String methodName;
-    public final List<String> classNames;
+    private final List<ClassDefinition> classes;
 
-    public MethodCall(String aMethodName, String aClassName, String... moreClassNames) {
+    public MethodDefinition(String aMethodName, ClassDefinition aClassName, ClassDefinition... moreClassNames) {
         methodName = aMethodName;
-        classNames = new ArrayList<String>();
-        classNames.add(aClassName);
-        classNames.addAll(Arrays.asList(moreClassNames));
+        List<ClassDefinition> classesList = new ArrayList<ClassDefinition>();
+        classesList.add(aClassName);
+        classesList.addAll(Arrays.asList(moreClassNames));
+        classes = classesList;
     }
 
     public boolean classMatches(String name) {
-        for (String className : classNames) {
-            if (name.equals(className) || name.endsWith(DOT + className)) {
+        for (ClassDefinition classDefinition : classes) {
+            if (classDefinition.matches(name)) {
                 return true;
             }
         }
@@ -32,8 +32,8 @@ public class MethodCall {
 
     public boolean importMatches(ImportDeclaration node) {
         String fqName = node.asFullyQualifiedName();
-        for (String className : classNames) {
-            String name = DOT + className + DOT;
+        for (ClassDefinition classDefinition : classes) {
+            String name =classDefinition.asText() + ClassDefinition.DOT;
             if (node.astStarImport()) {
                 name += STAR;
             } else {

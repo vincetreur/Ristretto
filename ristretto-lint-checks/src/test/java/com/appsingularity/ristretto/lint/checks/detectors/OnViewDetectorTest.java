@@ -52,4 +52,14 @@ public class OnViewDetectorTest extends BaseLintDetectorTest {
         assertTrue(output.contains(NO_WARNINGS));
     }
 
+    public void testOnViewWithIdOtherPackage() throws Exception {
+        String output = lintFiles("onview/OnViewWithIdOtherPackage.java");
+        assertFalse(output.contains(OnViewDetector.ISSUE.getId()));
+        assertFalse(output.contains("Information"));
+        assertFalse(output.contains("Consider using with(R.id.some_id)"));
+        assertFalse(output.contains(SIX_WARNINGS));
+        assertTrue(output.contains(NO_WARNINGS));
+    }
+
+
 }
