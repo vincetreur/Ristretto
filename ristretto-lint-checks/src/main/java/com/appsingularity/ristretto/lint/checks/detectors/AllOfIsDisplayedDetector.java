@@ -11,7 +11,6 @@ import com.android.tools.lint.detector.api.Severity;
 import com.appsingularity.ristretto.lint.checks.detectors.util.MethodDefinitions;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import lombok.ast.AstVisitor;
@@ -60,9 +59,7 @@ public class AllOfIsDisplayedDetector extends Detector implements Detector.JavaS
         // has isDisplayed()
         boolean foundIsDisplayed = false;
         MethodInvocation other = null;
-        Iterator<Expression> iterator = args.iterator();
-        while (iterator.hasNext()) {
-            Expression next = iterator.next();
+        for (Expression next : args) {
             if (next instanceof MethodInvocation) {
                 MethodInvocation invocation = (MethodInvocation) next;
                 if (isNode(context, invocation, MethodDefinitions.IS_DISPLAYED)) {

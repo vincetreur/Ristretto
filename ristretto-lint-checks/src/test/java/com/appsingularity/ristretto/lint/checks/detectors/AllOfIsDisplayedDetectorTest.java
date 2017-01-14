@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class AllOfIsDisplayedDetectorTest extends BaseLintDetectorTest {
-    public static final String SIXTEEN_WARNINGS = NUMBERED_WARNINGS.format(new Object[] {16});
-    public static final String FORTY_EIGHT_WARNINGS = NUMBERED_WARNINGS.format(new Object[] {48});
+    private static final String SIXTEEN_WARNINGS = NUMBERED_WARNINGS.format(new Object[] {16});
+    private static final String FORTY_EIGHT_WARNINGS = NUMBERED_WARNINGS.format(new Object[] {48});
 
     @Override
     protected Detector getDetector() {

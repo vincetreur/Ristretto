@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class WithTextDetectorTest extends BaseLintDetectorTest {
-    public static final String SIX_WARNINGS = NUMBERED_WARNINGS.format(new Object[] {6});
+    private static final String SIX_WARNINGS = NUMBERED_WARNINGS.format(new Object[] {6});
 
     @Override
     protected Detector getDetector() {

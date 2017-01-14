@@ -1,10 +1,10 @@
 package com.appsingularity.ristretto.lint.checks.detectors.util;
 
 
-public class ClassDefinition {
+class ClassDefinition {
     public static final String DOT = ".";
-    public final String name;
-    public final String packageName;
+    private final String name;
+    private final String packageName;
 
     public ClassDefinition(String aName, String aPackageName) {
         name = aName;

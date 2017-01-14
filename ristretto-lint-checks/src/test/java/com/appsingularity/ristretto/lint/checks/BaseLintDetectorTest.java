@@ -17,8 +17,6 @@ import java.text.MessageFormat;
 public abstract class BaseLintDetectorTest extends LintDetectorTest {
     private static final String PATH_TEST_RESOURCES = "/src/test/resources/";
     public static final String NO_WARNINGS = "No warnings.";
-    public static final String ONE_WARNING = "0 errors, 1 warnings";
-    public static final String TWO_WARNINGS = "0 errors, 2 warnings";
     public static final String THREE_WARNINGS = "0 errors, 3 warnings";
     public static final MessageFormat NUMBERED_WARNINGS = new MessageFormat("0 errors, {0} warnings");
 

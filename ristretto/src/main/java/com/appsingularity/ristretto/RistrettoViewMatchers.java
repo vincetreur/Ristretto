@@ -12,6 +12,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.is;
 
+@SuppressWarnings("WeakerAccess")
 public final class RistrettoViewMatchers {
 
     private RistrettoViewMatchers() {
@@ -21,6 +22,7 @@ public final class RistrettoViewMatchers {
     /**
      * This replaces withText(Text)
      */
+    @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(String text) {
         return with(is(text));
     }
@@ -28,6 +30,7 @@ public final class RistrettoViewMatchers {
     /**
      * This replaces withText(resourceId) and withText(stringMatcher)
      */
+    @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(final Matcher<String> stringMatcher) {
         return withText(stringMatcher);
     }
@@ -35,6 +38,7 @@ public final class RistrettoViewMatchers {
     /**
      * This replaces withId(viewId) and withText(stringId)
      */
+    @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(final int resourceId) {
         // This is a placeholder to resolve the resourceId into a type.
         return new WithMatcher(resourceId);

@@ -11,6 +11,7 @@ import com.appsingularity.ristretto.lint.checks.detectors.WithViewDetector;
 import java.util.Arrays;
 import java.util.List;
 
+@SuppressWarnings("UnusedDeclaration")
 public class RistrettoLintIssueRegistry extends IssueRegistry {
 
     @Override

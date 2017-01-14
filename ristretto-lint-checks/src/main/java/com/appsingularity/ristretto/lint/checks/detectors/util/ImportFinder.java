@@ -8,11 +8,11 @@ import lombok.ast.ImportDeclaration;
 import lombok.ast.Node;
 
 
-public class ImportFinder extends ForwardingAstVisitor {
+class ImportFinder extends ForwardingAstVisitor {
     private boolean importFound = false;
-    private MethodDefinition methodDefinition;
+    private final MethodDefinition methodDefinition;
 
-    ImportFinder(MethodDefinition aMethodDefinition) {
+    private ImportFinder(MethodDefinition aMethodDefinition) {
         methodDefinition = aMethodDefinition;
     }
 
@@ -31,7 +31,7 @@ public class ImportFinder extends ForwardingAstVisitor {
         return true;
     }
 
-    boolean isImportFound() {
+    private boolean isImportFound() {
         return importFound;
     }
 
