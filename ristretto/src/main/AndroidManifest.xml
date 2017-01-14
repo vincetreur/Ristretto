@@ -1,7 +1,5 @@
-<manifest package="com.appsingularity.ristretto"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="com.appsingularity.ristretto">
 
-    <application>
+    <application/>
 
-    </application>
 </manifest>

@@ -43,7 +43,7 @@ public final class RistrettoViewMatchers {
     private static class WithMatcher extends TypeSafeMatcher<View> {
         private Resources resources = null;
         private Matcher<View> matcher;
-        private int resourceId;
+        private final int resourceId;
 
         WithMatcher(int id) {
             resourceId = id;
