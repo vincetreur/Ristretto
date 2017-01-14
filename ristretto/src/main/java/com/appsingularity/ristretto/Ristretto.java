@@ -16,7 +16,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.appsingularity.ristretto.RistrettoViewMatchers.with;
 import static org.hamcrest.Matchers.allOf;
 
-// TODO: Add withView(Matcher... matcher)
 @SuppressWarnings("WeakerAccess")
 public final class Ristretto {
 
