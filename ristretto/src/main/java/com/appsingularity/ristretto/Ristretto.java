@@ -25,8 +25,8 @@ public final class Ristretto {
     }
 
     /**
-     * This replaces onView(withId(viewId)) and onView(withText(stringId))
-     * @see {@link android.support.test.espresso.Espresso#onView(org.hamcrest.Matcher)}
+     * This replaces {@code onView(withId(viewId))} and {@code onView(withText(stringId))}
+     * @see android.support.test.espresso.Espresso#onView(org.hamcrest.Matcher)
      */
     @SuppressWarnings("UnusedDeclaration")
     public static ViewInteraction withView(final int resourceId) {
@@ -34,16 +34,25 @@ public final class Ristretto {
         return onView(with(resourceId));
     }
 
+    /**
+     * This replaces {@code onView(withText(String))}
+     * @see android.support.test.espresso.Espresso#onView(org.hamcrest.Matcher)
+     * @see android.support.test.espresso.matcher.ViewMatchers#withText(String)
+     */
     @SuppressWarnings("UnusedDeclaration")
     public static ViewInteraction withView(final String text) {
-        return withView(withText(text));
+        return onView(withText(text));
     }
 
 
+    /**
+     * This replaces {@code onView(Matcher<View>)} and {@code onView(Matcher<String>)}
+     * @see android.support.test.espresso.Espresso#onView(org.hamcrest.Matcher)
+     */
     @SuppressWarnings("UnusedDeclaration")
     public static ViewInteraction withView(final Matcher matcher) {
         if (matcher instanceof SubstringMatcher) {
-            return onView(withText(matcher));
+            return onView(withText((Matcher<String>) matcher));
         }
         return onView((Matcher<View>) matcher);
     }

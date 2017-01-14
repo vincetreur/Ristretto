@@ -20,7 +20,8 @@ public final class RistrettoViewMatchers {
     }
 
     /**
-     * This replaces withText(Text)
+     * Shorthand for {@code withText(Text))
+     * @see android.support.test.espresso.matcher.ViewMatchers#withText(String)
      */
     @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(String text) {
@@ -28,7 +29,9 @@ public final class RistrettoViewMatchers {
     }
 
     /**
-     * This replaces withText(resourceId) and withText(stringMatcher)
+     * Shorthand for {@code withText(resourceId)} and {@code withText(stringMatcher)}
+     * @see android.support.test.espresso.matcher.ViewMatchers#withText(int)
+     * @see android.support.test.espresso.matcher.ViewMatchers#withText(Matcher<String>)
      */
     @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(final Matcher<String> stringMatcher) {
@@ -36,7 +39,9 @@ public final class RistrettoViewMatchers {
     }
 
     /**
-     * This replaces withId(viewId) and withText(stringId)
+     * Shorthand for {@code withId(viewId)} and {@code withText(stringId)}
+     * @see android.support.test.espresso.matcher.ViewMatchers#withId(int)
+     * @see android.support.test.espresso.matcher.ViewMatchers#withText(int)
      */
     @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(final int resourceId) {

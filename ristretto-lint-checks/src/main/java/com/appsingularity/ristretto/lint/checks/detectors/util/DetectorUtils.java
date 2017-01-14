@@ -37,7 +37,7 @@ public final class DetectorUtils {
      * @param context   The context
      * @param argument  The argument we are trying to match
      * @param methodDefinition  The method we are matching against
-     * @return @{code true} if it matches, false otherwise
+     * @return {@code true} if it matches, false otherwise
      */
     public static boolean isNode(JavaContext context, MethodInvocation argument, MethodDefinition methodDefinition) {
         if (!methodDefinition.methodName.equals(argument.getDescription())) {
