@@ -21,11 +21,10 @@ import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUt
 import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUtils.isNode;
 
 public class WithIdDetector extends Detector implements Detector.JavaScanner {
-    private static final String ID = "RistrettoWithId";
     private static final MethodDefinition METHOD_CALL = MethodDefinitions.WITH_ID;
     private static final String MESSAGE_FORMAT = "Consider using `with({0})`";
     public static final Issue ISSUE = Issue.create(
-            ID,
+            IssuesIds.WITH_ISSUE_ID,
             "You are using withId()",
             "You are using `ViewMatchers.withId()` but you could be using `RistrettoViewMatchers.with()` or `Ristretto.withView()`",
             Category.USABILITY, 6, Severity.INFORMATIONAL,

@@ -7,7 +7,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 public class SuppressLint {
 
-    @SuppressLint("RistrettoWithText")
+    @SuppressLint("RistrettoWith")
     public void foo() {
         withText(R.string.some_text).check(matches(isDisplayed())).perform(click());
         onView(withText(R.string.some_text)).check(matches(isDisplayed())).perform(click());

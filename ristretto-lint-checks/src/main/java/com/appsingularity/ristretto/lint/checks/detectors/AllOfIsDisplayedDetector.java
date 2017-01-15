@@ -27,7 +27,7 @@ import static com.appsingularity.ristretto.lint.checks.detectors.util.DetectorUt
 public class AllOfIsDisplayedDetector extends Detector implements Detector.JavaScanner {
     private static final String MESSAGE_FORMAT = "Consider using `withDisplayedView({0})`";
     public static final Issue ISSUE = Issue.create(
-            "RistrettoAllOfIsDisplayed",
+            IssuesIds.WITH_DISPLAYED_VIEW_ISSUE_ID,
             "Statement can be simplified",
             "You could be using `Ristretto.withDisplayedView()` which is shorter and easier to read.",
             Category.USABILITY, 6, Severity.INFORMATIONAL,

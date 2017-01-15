@@ -7,7 +7,7 @@ import static com.appsingularity.ristretto.RistrettoViewMatchers.with;
 
 public class SuppressLint {
 
-    @SuppressLint("RistrettoOnView")
+    @SuppressLint("RistrettoWithView")
     public void foo() {
         onView(withId(R.id.some_id)).check(matches(isDisplayed())).perform(click());
         onView(withText(R.string.some_text)).check(matches(isDisplayed())).perform(click());

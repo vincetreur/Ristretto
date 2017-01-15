@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.allOf;
 
 public class SuppressLint {
 
-    @SuppressLint("RistrettoAllOfIsDisplayed")
+    @SuppressLint("RistrettoWithDisplayedView")
     public void foo() {
         onView(allOf(withId(R.id.some_id), isDisplayed())).perform(click());
         onView(allOf(withText(R.string.some_text), isDisplayed())).perform(click());

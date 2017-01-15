@@ -26,7 +26,7 @@ public class OnViewDetector extends Detector implements Detector.JavaScanner {
     private static final String MESSAGE_FORMAT = "Consider using `withView({0})`";
     private static final MethodDefinition METHOD_CALL = MethodDefinitions.ON_VIEW;
     public static final Issue ISSUE = Issue.create(
-            "RistrettoOnView",
+            IssuesIds.WITH_VIEW_ISSUE_ID,
             "Statement can be simplified",
             "You could be using `Ristretto.withView()` which is shorter and easier to read.",
             Category.USABILITY, 6, Severity.INFORMATIONAL,

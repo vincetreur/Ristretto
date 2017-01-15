@@ -6,7 +6,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 public class SuppressLint {
 
-    @SuppressLint("RistrettoWithId")
+    @SuppressLint("RistrettoWith")
     public void foo() {
         withId(R.id.some_id).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.some_id)).check(matches(isDisplayed())).perform(click());
