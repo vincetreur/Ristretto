@@ -6,7 +6,7 @@ class IssuesIds {
     static final String WITH_VIEW_ISSUE_ID = "RistrettoWithView";
     static final String WITH_DISPLAYED_VIEW_ISSUE_ID = "RistrettoWithDisplayedView";
 
-    IssuesIds() {
+    private IssuesIds() {
         // This class should not be instantiated.
     }
 

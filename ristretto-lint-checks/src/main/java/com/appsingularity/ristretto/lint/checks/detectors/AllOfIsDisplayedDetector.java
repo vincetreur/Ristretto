@@ -1,6 +1,7 @@
 package com.appsingularity.ristretto.lint.checks.detectors;
 
 
+import com.android.annotations.Nullable;
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
@@ -10,7 +11,7 @@ import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
 import com.appsingularity.ristretto.lint.checks.detectors.util.MethodDefinitions;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import lombok.ast.AstVisitor;
@@ -36,25 +37,39 @@ public class AllOfIsDisplayedDetector extends Detector implements Detector.JavaS
     // region JavaScanner
     @Override
     public List<String> getApplicableMethodNames() {
-        return Arrays.asList(MethodDefinitions.ALL_OF.methodName);
+        return Collections.singletonList(MethodDefinitions.ALL_OF.methodName);
     }
 
     @Override
     public void visitMethod(JavaContext context, AstVisitor visitor, MethodInvocation node) {
-
         if (!isNode(context, node, MethodDefinitions.ALL_OF)) {
             return;
         }
         // is parent onView or withView?
         Node parentNode = node.getParent();
-        if (!isValidParent(context, parentNode)) {
+        if (isInvalidParent(context, parentNode)) {
             return;
         }
 
+        MethodInvocation matcher = extractMatcher(context, node);
+        // has withXXX()
+        if (!isWithNode(context, matcher)) {
+            return;
+        }
+        String message = argumentsAsString(matcher, MESSAGE_FORMAT);
+        context.report(ISSUE, node, context.getLocation(parentNode), message);
+    }
+    // endregion
+
+    /**
+     * Extract non-isDisplayed part or null
+     */
+    @Nullable
+    private MethodInvocation extractMatcher(JavaContext context, MethodInvocation node) {
         // Only 2 items in allOf()?
         StrictListAccessor<Expression, MethodInvocation> args = node.astArguments();
         if (args == null || args.size() != 2) {
-            return;
+            return null;
         }
         // has isDisplayed()
         boolean foundIsDisplayed = false;
@@ -70,29 +85,18 @@ public class AllOfIsDisplayedDetector extends Detector implements Detector.JavaS
             }
         }
         if (!foundIsDisplayed || other == null) {
-            return;
+            return null;
         }
-
-        // has withXXX()
-        if (!isWithNode(context, other)) {
-            return;
-        }
-        String message = argumentsAsString(other, MESSAGE_FORMAT);
-        context.report(ISSUE, node, context.getLocation(parentNode), message);
+        return other;
     }
-    // endregion
 
-
-    private boolean isValidParent(JavaContext context, Node parentNode) {
+    private boolean isInvalidParent(JavaContext context, Node parentNode) {
         if (!(parentNode instanceof MethodInvocation)) {
-            return false;
+            return true;
         }
         MethodInvocation parent = (MethodInvocation) parentNode;
-        if (!isNode(context, parent, MethodDefinitions.RISTRETTO_WITH_VIEW)
-                && !isNode(context, parent, MethodDefinitions.ON_VIEW)) {
-            return false;
-        }
-        return true;
+        return !isNode(context, parent, MethodDefinitions.RISTRETTO_WITH_VIEW)
+                && !isNode(context, parent, MethodDefinitions.ON_VIEW);
     }
 
 }

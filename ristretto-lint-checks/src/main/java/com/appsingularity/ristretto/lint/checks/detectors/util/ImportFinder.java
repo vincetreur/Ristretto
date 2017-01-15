@@ -16,8 +16,8 @@ class ImportFinder extends ForwardingAstVisitor {
         methodDefinition = aMethodDefinition;
     }
 
-    public static boolean findImport(JavaContext context, MethodDefinition aMehtodCall) {
-        ImportFinder finder = new ImportFinder(aMehtodCall);
+    public static boolean hasImport(JavaContext context, MethodDefinition aMethodCall) {
+        ImportFinder finder = new ImportFinder(aMethodCall);
         Node surroundingClass = context.getCompilationUnit();
         surroundingClass.accept(finder);
         return finder.isImportFound();

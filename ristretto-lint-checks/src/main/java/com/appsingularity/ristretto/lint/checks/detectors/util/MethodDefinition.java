@@ -33,7 +33,7 @@ public class MethodDefinition {
     public boolean importMatches(ImportDeclaration node) {
         String fqName = node.asFullyQualifiedName();
         for (ClassDefinition classDefinition : classes) {
-            String name =classDefinition.asText() + ClassDefinition.DOT;
+            String name = classDefinition.asText() + ClassDefinition.DOT;
             if (node.astStarImport()) {
                 name += STAR;
             } else {

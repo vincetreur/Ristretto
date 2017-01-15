@@ -1,6 +1,7 @@
 package com.appsingularity.ristretto.lint.checks.detectors.util;
 
 
+import com.android.annotations.Nullable;
 import com.android.tools.lint.detector.api.JavaContext;
 
 import java.text.MessageFormat;
@@ -20,7 +21,7 @@ public final class DetectorUtils {
 
     public static MethodInvocation getFirstArgument(MethodInvocation node) {
         StrictListAccessor<Expression, MethodInvocation> args = node.astArguments();
-        if (args.size() == 1) {
+        if (args != null && args.size() >= 1) {
             Expression expression = args.first();
             // Skip anything that is not a method call, such as operands
             if (expression instanceof MethodInvocation) {
@@ -40,24 +41,16 @@ public final class DetectorUtils {
      * @return {@code true} if it matches, false otherwise
      */
     public static boolean isNode(JavaContext context, MethodInvocation argument, MethodDefinition methodDefinition) {
-        if (!methodDefinition.methodName.equals(argument.getDescription())) {
+        if (methodDefinition == null || argument == null
+                || !methodDefinition.methodName.equals(argument.getDescription())) {
             return false;
         }
-        boolean keepLooking = true;
-        if (argument.astOperand() == null) {
-            // method found in the code with no operand, see if there is an import for it.
-            if (!ImportFinder.findImport(context, methodDefinition)) {
-                return false;
-            }
-            keepLooking = false;
+        Expression operand = argument.astOperand();
+        if (operand != null) {
+            return methodDefinition.classMatches(operand.toString());
         }
-        if (keepLooking) {
-            String operand = argument.astOperand().toString();
-            if (!methodDefinition.classMatches(operand)) {
-                return false;
-            }
-        }
-        return true;
+        // method found in the code with no operand, see if there is an import for it.
+        return ImportFinder.hasImport(context, methodDefinition);
     }
 
     public static String argumentsAsString(MethodInvocation node, String messageFormat) {
@@ -82,10 +75,10 @@ public final class DetectorUtils {
         return MessageFormat.format(messageFormat, buffer.toString());
     }
 
-    public static boolean isWithNode(JavaContext context, MethodInvocation node) {
-        return isNode(context, node, MethodDefinitions.WITH_ID) || isNode(context, node, MethodDefinitions.WITH_TEXT)
-                || isNode(context, node, MethodDefinitions.RISTRETTO_WITH);
+    public static boolean isWithNode(JavaContext context, @Nullable MethodInvocation node) {
+        return node != null && (isNode(context, node, MethodDefinitions.WITH_ID)
+                || isNode(context, node, MethodDefinitions.WITH_TEXT)
+                || isNode(context, node, MethodDefinitions.RISTRETTO_WITH));
     }
-
 
 }

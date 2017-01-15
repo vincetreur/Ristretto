@@ -43,11 +43,9 @@ public class WithViewDetector extends Detector implements Detector.JavaScanner {
     public void visitMethod(JavaContext context, AstVisitor visitor, MethodInvocation node) {
         if (isNode(context, node, METHOD_CALL)) {
             MethodInvocation first = getFirstArgument(node);
-            if (first != null) {
-                if (isWithNode(context, first)) {
-                    String message = argumentsAsString(first, MESSAGE_FORMAT);
-                    context.report(ISSUE, node, context.getLocation(node), message);
-                }
+            if (isWithNode(context, first)) {
+                String message = argumentsAsString(first, MESSAGE_FORMAT);
+                context.report(ISSUE, node, context.getLocation(node), message);
             }
         }
     }
