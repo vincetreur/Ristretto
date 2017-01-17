@@ -1,3 +1,4 @@
-include ':ristretto', ':ristrettosample'
+include ':ristretto'
 include ':ristretto-lint'
 include ':ristretto-lint-checks'
+include ':ristretto-sample'
