@@ -12,6 +12,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * A collection of shorthand ViewMatchers.
+ */
 @SuppressWarnings("WeakerAccess")
 public final class RistrettoViewMatchers {
 
@@ -20,8 +23,7 @@ public final class RistrettoViewMatchers {
     }
 
     /**
-     * Shorthand for {@code withText(Text))
-     * @see android.support.test.espresso.matcher.ViewMatchers#withText(String)
+     * Shorthand for {@code withText(Text)).
      */
     @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(String text) {
@@ -29,9 +31,7 @@ public final class RistrettoViewMatchers {
     }
 
     /**
-     * Shorthand for {@code withText(resourceId)} and {@code withText(stringMatcher)}
-     * @see android.support.test.espresso.matcher.ViewMatchers#withText(int)
-     * @see android.support.test.espresso.matcher.ViewMatchers#withText(Matcher<String>)
+     * Shorthand for {@code withText(Matcher<String>)}.
      */
     @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(final Matcher<String> stringMatcher) {
@@ -39,9 +39,9 @@ public final class RistrettoViewMatchers {
     }
 
     /**
-     * Shorthand for {@code withId(viewId)} and {@code withText(stringId)}
-     * @see android.support.test.espresso.matcher.ViewMatchers#withId(int)
-     * @see android.support.test.espresso.matcher.ViewMatchers#withText(int)
+     * Shorthand for {@code withId(viewId)} and {@code withText(stringId)}.
+     * This matcher will figure out if you are passing a string resource or an id resource.
+     * Other resource types are not supported.
      */
     @SuppressWarnings("UnusedDeclaration")
     public static Matcher<View> with(final int resourceId) {
