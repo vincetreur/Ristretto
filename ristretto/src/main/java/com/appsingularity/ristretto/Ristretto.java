@@ -16,6 +16,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.appsingularity.ristretto.RistrettoViewMatchers.with;
 import static org.hamcrest.Matchers.allOf;
 
+/**
+ * A shorthand class for Espresso.
+ * It contains shorthand methods for {@code onView(withId(int))}, {@code onView(allOf(withId(int), isDisplayed)))}
+ * and alike.
+ */
 @SuppressWarnings("WeakerAccess")
 public final class Ristretto {
 
