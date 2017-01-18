@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'build-dashboard'
 
 buildscript {
     repositories {
@@ -36,23 +37,7 @@ subprojects { project ->
         jcenter()
     }
 
-    apply plugin: 'checkstyle'
 
-    task checkstyle(type: Checkstyle) {
-        group 'verification'
-        configFile rootProject.file('checkstyle.xml')
-        source 'src/main/java'
-        ignoreFailures false
-        showViolations true
-        include '**/*.java'
-
-        classpath = files()
-    }
-
-    afterEvaluate {
-        if (project.tasks.findByName('check')) {
-            check.dependsOn('checkstyle')
-        }
-    }
+    apply from: rootProject.file('gradle/quality.gradle')
 
 }

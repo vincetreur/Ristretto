@@ -62,9 +62,7 @@ public final class DetectorUtils {
                 buffer.append(ClassDefinition.DOT);
             } else if (expression instanceof Select) {
                 if (buffer.length() != 0) {
-                    buffer.append("(");
-                    buffer.append(expression);
-                    buffer.append(")");
+                    buffer.append(MethodDefinition.formatAsArgument(expression));
                 } else {
                     buffer.append(expression);
                 }

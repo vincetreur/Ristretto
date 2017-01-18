@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RistrettoSample</string>
     <string name="label">Label</string>
+    <string name="longer_label">Longer Label</string>
 </resources>

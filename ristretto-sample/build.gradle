@@ -25,6 +25,7 @@ android {
 dependencies {
 
     androidTestCompile project(":ristretto")
+    debugCompile project(":ristretto-lint")
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

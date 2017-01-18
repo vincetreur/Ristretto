@@ -1,0 +1,27 @@
+apply plugin: 'pmd'
+
+def pmdTask = task pmd(type: Pmd) {
+    description 'Run PMD'
+    group 'verification'
+    ruleSetFiles = files("${rootProject.projectDir}/gradle/quality/pmd-ruleset.xml")
+    ignoreFailures = true
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude 'androidTest/**/*.java'
+    exclude 'test/**/*.java'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "$project.buildDir/reports/pmd/pmd.xml"
+        }
+        html {
+            destination "$project.buildDir/reports/pmd/pmd.html"
+        }
+    }
+}
+tasks['quality'].dependsOn pmdTask

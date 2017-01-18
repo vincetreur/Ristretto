@@ -68,7 +68,7 @@ Ristretto comes with a set of lint checks that will point out all the places whe
 Just add the Ristretto Lint dependency to your `build.gradle`
 ```groovy
 dependencies {
-    compile project("com.appsingularity:ristretto-lint:1.0.0")
+    debugCompile project("com.appsingularity:ristretto-lint:1.0.0")
 }
 ```
 >This will add only the generated `BuildConfig` (with only 1 method) to your code base. But the default Prouard or DexGaurd configuration will strip it out for you since nobody is using it.

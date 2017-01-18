@@ -1,0 +1,14 @@
+apply plugin: 'checkstyle'
+
+def checkstyleTask = task checkstyle(type: Checkstyle) {
+    group 'verification'
+    configFile rootProject.file('gradle/quality/checkstyle.xml')
+    source 'src/main/java'
+    ignoreFailures false
+    showViolations true
+    include '**/*.java'
+
+    classpath = files()
+}
+
+tasks['quality'].dependsOn checkstyleTask

@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.allOf;
  * It contains shorthand methods for {@code onView(withId(int))}, {@code onView(allOf(withId(int), isDisplayed)))}
  * and alike.
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "UnusedDeclaration"})
 public final class Ristretto {
 
     private Ristretto() {
@@ -32,7 +32,6 @@ public final class Ristretto {
      * This replaces {@code onView(withId(viewId))} and {@code onView(withText(stringId))}.
      * @see RistrettoViewMatchers#with(int)
      */
-    @SuppressWarnings("UnusedDeclaration")
     public static ViewInteraction withView(final int resourceId) {
         // This is a placeholder to resolve the resourceId into a type.
         return onView(with(resourceId));
@@ -42,29 +41,30 @@ public final class Ristretto {
      * This replaces {@code onView(withText(String))}.
      * @see RistrettoViewMatchers#with(String)
      */
-    @SuppressWarnings("UnusedDeclaration")
     public static ViewInteraction withView(final String text) {
         return onView(withText(text));
     }
 
-
     /**
-     * This replaces {@code onView(Matcher<View>)} and {@code onView(Matcher<String>)}.
+     * This replaces {@code onView(Matcher<View>)}.
      * @see RistrettoViewMatchers#with(Matcher)
      */
-    @SuppressWarnings("UnusedDeclaration")
-    public static ViewInteraction withView(final Matcher matcher) {
-        if (matcher instanceof SubstringMatcher) {
-            return onView(withText((Matcher<String>) matcher));
-        }
-        return onView((Matcher<View>) matcher);
+    public static ViewInteraction withView(final Matcher<View> matcher) {
+        return onView(matcher);
+    }
+
+    /**
+     * This replaces {@code onView(SubstringMatcher)}.
+     * @see RistrettoViewMatchers#with(String)
+     */
+    public static ViewInteraction withView(final SubstringMatcher matcher) {
+        return onView(withText(matcher));
     }
 
     /**
      * This replaces onView(allOf(withId(viewId), isDisplayed())) and onView(allOf(withText(stringId), isDisplayed())).
      * @see RistrettoViewMatchers#with(int)
      */
-    @SuppressWarnings("UnusedDeclaration")
     public static ViewInteraction withDisplayedView(final int resourceId) {
         // This is a placeholder to resolve the resourceId into a type.
         return withDisplayedView(with(resourceId));
@@ -74,21 +74,24 @@ public final class Ristretto {
      * This replaces onView(allOf(withText(String), isDisplayed())).
      * @see RistrettoViewMatchers#with(String)
      */
-    @SuppressWarnings("UnusedDeclaration")
     public static ViewInteraction withDisplayedView(final String text) {
         return withDisplayedView(with(text));
     }
 
     /**
-     * This replaces onView(allOf(Matcher, isDisplayed())).
+     * This replaces onView(allOf(Matcher<View>, isDisplayed())).
      * @see Ristretto#withView(Matcher)
      */
-    @SuppressWarnings("UnusedDeclaration")
-    public static ViewInteraction withDisplayedView(final Matcher matcher) {
-        if (matcher instanceof SubstringMatcher) {
-            return onView(allOf(withText(matcher), isDisplayed()));
-        }
-        return onView(allOf((Matcher<View>) matcher, isDisplayed()));
+    public static ViewInteraction withDisplayedView(final Matcher<View> matcher) {
+        return onView(allOf(matcher, isDisplayed()));
+    }
+
+    /**
+     * This replaces onView(allOf(SubstringMatcher, isDisplayed())).
+     * @see Ristretto#withView(SubstringMatcher)
+     */
+    public static ViewInteraction withDisplayedView(final SubstringMatcher matcher) {
+        return onView(allOf(withText(matcher), isDisplayed()));
     }
 
 }

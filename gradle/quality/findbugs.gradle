@@ -1,0 +1,40 @@
+
+apply plugin: 'findbugs'
+
+findbugs {
+    sourceSets = []
+    ignoreFailures = true
+}
+
+afterEvaluate {
+    def assembleTask
+    def classesDir
+    if (project.plugins.hasPlugin("com.android.library")
+            || project.plugins.hasPlugin("com.android.application")) {
+        assembleTask = project.tasks.findByName("assemble")
+        classesDir =  "intermediates/classes/debug"
+    } else {
+        assembleTask = project.tasks.findByName("assemble")
+        classesDir =  "classes/main"
+    }
+    def findbugsTask = task findbugs(type: FindBugs, dependsOn: assembleTask) {
+        description 'Run findbugs'
+        group 'verification'
+
+        classes = fileTree("${project.buildDir}/${classesDir}")
+        source = fileTree('src/main/java')
+        classpath = files()
+
+        effort = 'max'
+        reportLevel = "low"
+
+        excludeFilter = file("${rootProject.projectDir}/gradle/quality/findbugs-exclude.xml")
+
+        reports {
+            xml.enabled = false
+            xml.withMessages = true
+            html.enabled = !xml.isEnabled()
+        }
+    }
+    tasks['quality'].dependsOn findbugsTask
+}

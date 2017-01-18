@@ -1,0 +1,12 @@
+def qualityTask = task quality() {
+    description 'Run pmd, findbugs and checkstyle'
+    group 'verification'
+}
+
+apply from: rootProject.file('gradle/quality/checkstyle.gradle')
+apply from: rootProject.file('gradle/quality/findbugs.gradle')
+apply from: rootProject.file('gradle/quality/pmd.gradle')
+
+afterEvaluate {
+    tasks['check'].dependsOn qualityTask
+}

@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (c) 2011-2017 App Singularity
+  -->
+
+<FindBugsFilter>
+
+    <!-- Exclude warnings found in app -->
+    <Match>
+        <!-- Not available before API 19 -->
+        <Bug pattern="DM_BOXED_PRIMITIVE_FOR_COMPARE"/>
+    </Match>
+    <Match>
+        <!-- This is how Android works -->
+        <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+    </Match>
+
+    <!-- Exclude files -->
+    <Match>
+        <Class name="~.*.*_"/>
+    </Match>
+
+    <Match>
+        <Class name="~.*R\$.*"/>
+    </Match>
+    <Match>
+        <Class name="~.*Manifest\$.*"/>
+    </Match>
+
+</FindBugsFilter>

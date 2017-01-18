@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lombok.ast.Expression;
 import lombok.ast.ImportDeclaration;
 
 
@@ -49,6 +50,10 @@ public class MethodDefinition {
     @Override
     public String toString() {
         return "[MethodCall " + methodName + "]";
+    }
+
+    public static String formatAsArgument(Expression expression) {
+        return "(" + expression + ")";
     }
 
 }
