@@ -22,7 +22,8 @@ Why should you need to explicitly specify that you are matching with some text i
 Ristretto allows you to write the same test code as you already write, but less verbose.
 Let's see some examples.
 
-##Espresso vs Ristretto
+Espresso vs Ristretto
+-
 
 Simple replacements
 
@@ -52,8 +53,8 @@ Ordering does not matter.
 `onView(allOf(withId(R.id.some_id), isDisplayed()))` is equal to `onView(allOf(isDisplayed(), withId(R.id.some_id)))`.
 
 
-##How to use
-
+How to use
+-
 Configure your `build.gradle` and add one dependency and you are ready to go.
 
 ```groovy
@@ -66,8 +67,8 @@ dependencies {
 }
 ```
 
-##How to learn
-
+How to learn
+-
 Ristretto comes with a set of lint checks that will point out all the places where you can write Ristretto shorthand instead of the longform Espresso.
 Just add the Ristretto Lint dependency to your `build.gradle`
 ```groovy
@@ -75,17 +76,15 @@ dependencies {
     debugCompile project("com.appsingularity:ristretto-lint:1.0.0")
 }
 ```
->This will add only the generated `BuildConfig` (with only 1 method) to your code base. But the default Prouard or DexGaurd configuration will strip it out for you since nobody is using it. (And it is only in your debug build.)
 
-###ProGuard
-Since Ristretto adds no code to your app (except for the `BuildConfig`) you can safely use Ristretto in combination with ProGuard or DexGuard.
-
-#Version
+Version
+-
 
 Version 1.0.0
 - Initial release.
 
-#License
+License
+-
 
     Copyright 2017 Vince M. Treur
 
