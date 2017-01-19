@@ -10,6 +10,10 @@ appVersion {
     isSnapshot false
 }
 
+repositories {
+    jcenter()
+}
+
 android {
     lintOptions {
         abortOnError false

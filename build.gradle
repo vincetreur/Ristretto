@@ -31,13 +31,5 @@ subprojects { project ->
     group = GROUP
     version = VERSION_NAME
 
-
-    repositories {
-        mavenLocal()
-        jcenter()
-    }
-
-
     apply from: rootProject.file('gradle/quality.gradle')
-
 }

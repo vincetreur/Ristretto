@@ -10,6 +10,10 @@ appVersion {
     isSnapshot false
 }
 
+repositories {
+    jcenter()
+}
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
@@ -37,7 +41,6 @@ task copyLintJar(type: Copy) {
     }
     into 'build/intermediates/lint/'
 }
-
 
 project.afterEvaluate {
     def compileLintTask = project.tasks.find { it.name == 'compileLint' }
