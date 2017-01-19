@@ -14,7 +14,7 @@ Awesome, consistent and it's very clear what it is you are doing.
 
 However...
 
-After a few hours writing test code you'll find you're code being a little bit to verbose.
+After a few hours writing test code you'll find your code being a little bit too verbose.
 Not anymore.
 
 Why should you need to explicitly specify that you are matching with some text if you are passing in some text as a parameter? Some for the view id, you can already see that it is a view id.
@@ -57,6 +57,10 @@ Ordering does not matter.
 Configure your `build.gradle` and add one dependency and you are ready to go.
 
 ```groovy
+repositories {
+    jcenter()
+}
+
 dependencies {
     androidTestCompile project("com.appsingularity:ristretto:1.0.0")
 }
@@ -71,7 +75,7 @@ dependencies {
     debugCompile project("com.appsingularity:ristretto-lint:1.0.0")
 }
 ```
->This will add only the generated `BuildConfig` (with only 1 method) to your code base. But the default Prouard or DexGaurd configuration will strip it out for you since nobody is using it.
+>This will add only the generated `BuildConfig` (with only 1 method) to your code base. But the default Prouard or DexGaurd configuration will strip it out for you since nobody is using it. (And it is only in your debug build.)
 
 ###ProGuard
 Since Ristretto adds no code to your app (except for the `BuildConfig`) you can safely use Ristretto in combination with ProGuard or DexGuard.
